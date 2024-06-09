@@ -47,8 +47,6 @@ class CdkDeploymentStack(Stack):
             }
         ))
 
-        oai = cloudfront.OriginAccessIdentity(self, "OAI", comment="OAI for my distribution")
-
         site_bucket.grant_read(oai)
 
         s3deploy.BucketDeployment(

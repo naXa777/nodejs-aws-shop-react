@@ -7,6 +7,24 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
+import axios from "axios";
+
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      const { status } = error.response;
+      switch (status) {
+        case 401: {
+          alert(`401 User is unauthorized`);
+          break;
+        }
+        case 403: {
+          alert(`403 Access Forbidden`);
+          break;
+        }
+      }
+    }
+);
 
 const queryClient = new QueryClient({
   defaultOptions: {
